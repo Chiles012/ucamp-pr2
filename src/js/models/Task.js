@@ -1,4 +1,4 @@
-import { getItemLocalStorage, setItemLocalStorage } from "../utils/localstorage"
+import { getItemLocalStorage, setItemLocalStorage } from "../utils/localstorage.js"
 
 class Task {
 
@@ -13,9 +13,10 @@ class Task {
     }
 
     save() {
-        const tasks = getItemLocalStorage('tasks') || []
-        this.id = date.length + 1
-        tasks.push(this)
+        const tasks = getItemLocalStorage('tasks') || [];
+        this.id = tasks.length + 1;
+        tasks.push(this.toJson());
+        setItemLocalStorage('tasks', tasks);
     }
 
     getAll() {
@@ -36,7 +37,9 @@ class Task {
     update(id, data) {
         const tasks = getItemLocalStorage('tasks') || []
         const newTasks = tasks.map(task => {
-            if (task.id === id) {
+            console.log(task.id, id)
+            if (task.id == id) {
+                console.log(data)
                 task = data
             }
             return task
