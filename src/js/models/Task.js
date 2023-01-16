@@ -6,6 +6,7 @@ class Task {
     title = ''
     description = ''
     status = 'pending'
+    user_id = null
 
     constructor(data) {
         Object.assign(this, data)
@@ -41,6 +42,16 @@ class Task {
             return task
         })
         setItemLocalStorage('tasks', newTasks)
+    }
+
+    assignUser(user) {
+        this.user_id = user.id
+        this.update(this.id, this)
+    }
+
+    getByUser(user) {
+        const tasks = getItemLocalStorage('tasks') || []
+        return tasks.filter(task => task.user_id === user.id)
     }
 
     toJson() {

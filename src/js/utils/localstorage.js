@@ -3,7 +3,7 @@ export const getItemLocalStorage = (key) => {
 };
 
 export const setItemLocalStorage = (key, value) => {
-    localStorage.setItem(key, JSON(stringify(value)));
+    localStorage.setItem(key, JSON.stringify(value));
 };
 
 export const removeItemLocalStorage = (key) => {
